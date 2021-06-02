@@ -1,0 +1,47 @@
+#include <iostream>
+using namespace std;
+void minmax(int a[], int n, int *min_ptr, int *max_ptr)
+{
+    int min1, max1, min2, max2;
+    switch (n)
+    {
+    case 1:
+        *min_ptr = *max_ptr = a[0];
+        return;
+    case 2:
+        if (a[0] < a[1])
+        {
+            *min_ptr = a[0];
+            *max_ptr = a[1];
+        }
+        else
+        {
+            *min_ptr = a[1];
+            *max_ptr = a[0];
+        }
+        return;
+    default:
+        minmax(a, n / 2, &min1, &min2);
+        minmax(a + n / 2, n - n / 2, &min2, &max2);
+        if (min1 < min2)
+            *min_ptr = min1;
+        else
+            *min_ptr = min2;
+        if (max1 < max2)
+            *max_ptr = max2;
+        else
+            *max_ptr = max1;
+        return;
+    }
+}
+int main()
+    {
+        int a[] = {0, 23, 36, 40, 34, 23, 12, 54, 56,434};
+        
+        int ad, bd;
+        cout<<ad<<"  "<<bd<<endl;
+        minmax(a, 12, &ad, &bd);
+        cout << ad <<"   "<< bd << endl;
+      system("pause");
+        return 0;
+    }
